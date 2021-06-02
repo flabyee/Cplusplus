@@ -5,16 +5,17 @@ class Mole
 private:
     int moleNum;    //몇번째 두더지인지
     int holeNum;    //몇번째 구멍에 있는지
-    bool isRed;    //파란색인가 빨간색인가 (true면 red)
+    bool isFake;    //파란색인가 빨간색인가 (true면 red)
 
     int life;
 
     char mole[3][4] =
     {
-        "___",
+        "_#_",
         "| |",
         "| |"
     };
+
     char hole[3][4] =
     {
         "   ",
@@ -35,7 +36,7 @@ public:
     //두더지 번호 얻기
     int getMoleNum();
     // 색깔 얻기
-    bool getIsRed();
+    bool getIsFake();
     //두더지 그리기
     void drawMole();
     //두더지 삭제

@@ -12,7 +12,7 @@ void Mole::initMole()
     //drawMole();
     //setColor();
 
-    isRed = rand() % 2;
+    isFake = rand() % 2;
     //나중에 확률 조정
 
     key = rand() % 26 + 97; //97(a)~122(z)
@@ -37,39 +37,34 @@ int Mole::getMoleNum()
     return moleNum;
 }
 
-bool Mole::getIsRed()
+bool Mole::getIsFake()
 {
-    return isRed;
+    return isFake;
 }
 
 void Mole::drawMole()
 {
     //색 바꾸기(isRed에 따라)
-    if (isRed)
-    {
-        textcolor(4, 0);
-    }
-    else
-    {
-        textcolor(1, 0);
-    }
+    
     //그리기
     if (holeNum < 5)
     {
         for (int i = 0; i < 3; i++)
         {
             gotoXY(5 + (holeNum - 1) * 9, i + 2);
+
+            textcolor(9);
             cout << mole[i];
+            textcolor(15);
         }
 
-        //색 원상복귀
-        if (isRed)
+
+        if (isFake)
         {
-            textcolor(15, 0);
-        }
-        else
-        {
-            textcolor(15, 0);
+            textcolor(1);
+            gotoXY(5 + (holeNum - 1) * 9 + 1, 2);
+            cout << '$';
+            textcolor(15);
         }
 
         gotoXY(5 + (holeNum - 1) * 9 + 1, 3);
@@ -80,21 +75,25 @@ void Mole::drawMole()
         for (int i = 0; i < 3; i++)
         {
             gotoXY(5 + (holeNum % -5) * 9, i + 6);
-            cout << mole[i];
-        }
 
-        //색 원상복귀
-        if (isRed)
-        {
-            textcolor(15, 0);
-        }
-        else
-        {
-            textcolor(15, 0);
+            textcolor(9);
+            cout << mole[i];
+            textcolor(15);
+
+
         }
 
         gotoXY(5 + (holeNum % -5) * 9 + 1, 7);
         cout << key;
+
+        
+        if (isFake)
+        {
+            textcolor(1);
+            gotoXY(5 + (holeNum % -5) * 9 + 1, 6);
+            cout << '$';
+            textcolor(15);
+        }
     }
     
 

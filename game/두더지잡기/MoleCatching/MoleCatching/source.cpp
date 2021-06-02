@@ -119,7 +119,7 @@ int main()
         {
             if (moles[i].compareKey(key))
             {
-                if (moles[i].getIsRed())    score--;
+                if (moles[i].getIsFake())    score--;
                 else                        score++;
                 moles[i].deleteMole();
                 moles.erase(moles.begin() + i);
@@ -141,16 +141,6 @@ int main()
         gotoXY(20, 10);
         drawUI();
     }
-
-
-
-
-
-
-
-
-
-
 
     //DrawMap();
     //for (int i = 0; i < 3; i++)
