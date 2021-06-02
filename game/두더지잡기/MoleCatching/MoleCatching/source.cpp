@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <time.h>
 #include <vector>
+#include <algorithm>
 #define BLACK 0 #define BLUE 1 #define GREEN 2 #define CYAN 3 #define RED 4 #define MAGENTA 5 #define BROWN 6 #define LIGHTGRAY 7 #define DARKGRAY 8 #define LIGHTBLUE 9 #define LIGHTGREEN 10 #define LIGHTCYAN 11 #define LIGHTRED 12 #define LIGHTMAGENTA 13 #define YELLOW 14 #define WHITE 15 
 using namespace std;
 
@@ -15,14 +16,6 @@ using namespace std;
 " |a| "
 "_| |_"  _____  //±âº» ¶¥
 */
-
-
-void SetConsoleView()
-{
-    system("mode con:cols=40 lines=13");
-    system("title MOLE CATCHING");
-}
-
 
 char gameMap[12][41] =
 {
@@ -40,6 +33,17 @@ char gameMap[12][41] =
     "++++++++++++++++++++++++++++++++++++++++"
 };
 
+vector<Mole> moles;
+
+int score = 0;
+
+void SetConsoleView()
+{
+    system("mode con:cols=40 lines=16");
+    system("title MOLE CATCHING");
+
+    moles.clear();  
+}
 
 void DrawMap()
 {
@@ -57,70 +61,85 @@ void DrawMap()
     }*/
 }
 
-
-Mole mole1;
-
-void catchMole()
+void drawUI()
 {
-    char key;
-    int num;
-    
-    key = getKeyDown();
-    key = tolower(key);
-    switch (key)
-    {
-    case 'q':
-        num = 1;
-        break;
-    case 'w':
-        num = 2;
-        break;
-    case 'e':
-        num = 3;
-        break;
-    case 'r':
-        num = 4;
-        break;
-    case 'a':
-        num = 5;
-        break;
-    case 's':
-        num = 6;
-        break;
-    case 'd':
-        num = 7;
-        break;
-    case 'f':
-        num = 8;
-        break;
-    default:
-        num = 0;
-        break;
-    }
-
-    
-    if (mole1.getHoleNum() == num)
-    {
-        mole1.deleteMole();
-        mole1.initMole();
-    }
+    gotoXY(0, 13);
+    cout << "SCORE : " <<score << "                       ";
 }
+
+void setHoleNum(Mole* mole)
+{
+    bool bCheck = false;
+
+    do {
+        bCheck = false;
+
+        mole->setHoleNum(rand() % 8 + 1);
+
+        for (int i = 0; i < (int)moles.size(); i++)
+        {
+            if ((mole->getHoleNum() == moles[i].getHoleNum()) && (mole->getMoleNum() != moles[i].getMoleNum()))
+            {
+                bCheck = true;
+            }
+        }
+    } while (bCheck);
+
+}
+
 
 int main()
 {
+    char key = '1';
+
     srand((unsigned)time(NULL));
     cursorVisible(false);
     SetConsoleView();
 
     DrawMap();
 
-    mole1.initMole();
-    mole1.drawMole();
+
+
     while (true)
     {
-        catchMole();
+        if ((rand() % 100 < 10) && moles.size() < 5)
+        {
+            Mole mole;
+            mole.initMole();
+            setHoleNum(&mole);
+            mole.drawMole();
+            moles.push_back(mole);
+        }
 
+
+        key = getKeyDown();
+        key = tolower(key);
+
+        for (int i = 0; i < (int)moles.size(); i++)
+        {
+            if (moles[i].compareKey(key))
+            {
+                if (moles[i].getIsRed())    score--;
+                else                        score++;
+                moles[i].deleteMole();
+                moles.erase(moles.begin() + i);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < (int)moles.size(); i++)
+        {
+            if (moles[i].isEnd())
+            {
+                moles[i].deleteMole();
+                moles.erase(moles.begin() + i);
+                i--;
+            }
+        }
+
+        Sleep(100);
         gotoXY(20, 10);
+        drawUI();
     }
 
 

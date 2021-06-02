@@ -4,25 +4,42 @@
 #include <iostream>
 using namespace std;
 
+int Mole::num = 1;
+
 void Mole::initMole()
 {
     //setHoleNum();
     //drawMole();
     //setColor();
-    life = 10;
-
-    isAlive = true;
-
-    holeNum = rand() % 8 + 1;
-    //겹치지 안게하기
 
     isRed = rand() % 2;
     //나중에 확률 조정
+
+    key = rand() % 26 + 97; //97(a)~122(z)
+
+    life = 15;
+
+    moleNum = Mole::num++;
 }
 
 int Mole::getHoleNum()
 {
     return holeNum;
+}
+
+char Mole::getKey()
+{
+    return key;
+}
+
+int Mole::getMoleNum()
+{
+    return moleNum;
+}
+
+bool Mole::getIsRed()
+{
+    return isRed;
 }
 
 void Mole::drawMole()
@@ -44,6 +61,19 @@ void Mole::drawMole()
             gotoXY(5 + (holeNum - 1) * 9, i + 2);
             cout << mole[i];
         }
+
+        //색 원상복귀
+        if (isRed)
+        {
+            textcolor(15, 0);
+        }
+        else
+        {
+            textcolor(15, 0);
+        }
+
+        gotoXY(5 + (holeNum - 1) * 9 + 1, 3);
+        cout << key;
     }
     else if (holeNum > 4)
     {
@@ -52,16 +82,21 @@ void Mole::drawMole()
             gotoXY(5 + (holeNum % -5) * 9, i + 6);
             cout << mole[i];
         }
+
+        //색 원상복귀
+        if (isRed)
+        {
+            textcolor(15, 0);
+        }
+        else
+        {
+            textcolor(15, 0);
+        }
+
+        gotoXY(5 + (holeNum % -5) * 9 + 1, 7);
+        cout << key;
     }
-    //색 원상복귀
-    if (isRed)
-    {
-        textcolor(15, 0);
-    }
-    else
-    {
-        textcolor(15, 0);
-    }
+    
 
 
 }
@@ -85,19 +120,29 @@ void Mole::deleteMole()
             cout << hole[i];
         }
     }
-
-    isAlive = false;
 }
 
-void Mole::isEnd()
+void Mole::setHoleNum(int value)
+{
+    holeNum = value;
+}
+
+bool Mole::isEnd()
 {
     if (life > 0)
     {
         life--;
+        return false;
     }
     else
     {
-        deleteMole();
+        return true;
     }
 
+}
+
+bool Mole::compareKey(char _key)
+{
+    if (key == _key)    return true;
+                        return false;
 }
