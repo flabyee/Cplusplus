@@ -1,0 +1,4 @@
+﻿  main.cpp
+D:\souretreee\Cplusplus\game\슈팅게임\1\ShootingGame\ShootingGame\main.cpp(29,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\souretreee\Cplusplus\game\슈팅게임\1\ShootingGame\ShootingGame\main.cpp(31,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  ShootingGame.vcxproj -> D:\souretreee\Cplusplus\game\슈팅게임\1\ShootingGame\Debug\ShootingGame.exe
