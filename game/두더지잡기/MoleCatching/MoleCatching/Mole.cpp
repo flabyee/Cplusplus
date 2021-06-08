@@ -12,7 +12,15 @@ void Mole::initMole()
     //drawMole();
     //setColor();
 
-    isFake = rand() % 2;
+    if (rand() % 10 > 0)
+    {
+        isFake = false;
+    }
+    else
+    {
+        isFake = true;
+    }
+    
     //나중에 확률 조정
 
     key = rand() % 26 + 97; //97(a)~122(z)
@@ -131,6 +139,11 @@ bool Mole::isEnd()
     if (life > 0)
     {
         life--;
+        if (rand() % 20 > 18 && life < 9)
+        {
+            isFake = true;
+            drawMole();
+        }
         return false;
     }
     else

@@ -43,7 +43,7 @@ public:
     void deleteMole();
     //두더지 이미 누구 있는지 확인하고 빈 곳에 지정
     void setHoleNum(int value);
-    //시간후에 삭제
+    //시간후에 삭제 + 일정 확률로 fake로 변함
     bool isEnd();
     //누른 키와 두더지의 키 값이 같은지 비교
     bool compareKey(char _key);
