@@ -1,0 +1,7 @@
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\bin\Debug\EightQueens.exe.config
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\bin\Debug\EightQueens.exe
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\bin\Debug\EightQueens.pdb
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\obj\Debug\EightQueens.csprojAssemblyReference.cache
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\obj\Debug\EightQueens.csproj.CoreCompileInputs.cache
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\obj\Debug\EightQueens.exe
+D:\souretreee\Language\C#\algorithm\EightQueens\EightQueens\obj\Debug\EightQueens.pdb
